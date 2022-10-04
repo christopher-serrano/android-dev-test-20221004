@@ -16,7 +16,6 @@ class HomeFragment : BaseFragment(), KoinComponent {
 
     private var categoryList: List<String>? = null
 
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -27,14 +26,20 @@ class HomeFragment : BaseFragment(), KoinComponent {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        loadData()
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
         observeViewModel()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun observeViewModel() = viewmodel.run {
@@ -44,6 +49,7 @@ class HomeFragment : BaseFragment(), KoinComponent {
         categoryListObj.observe(viewLifecycleOwner) { list ->
             list?.let {
                 categoryList = it
+                setUpDynamicAdapter()
             }
         }
     }

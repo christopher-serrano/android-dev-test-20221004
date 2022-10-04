@@ -9,10 +9,11 @@ import com.example.apptest.ui.adapter.holder.JokeItemHolder
 class JokeTypeFactoryImpl : JokeTypeFactory {
     override fun holder(type: Int, view: View): DynamicAdapterViewHolder<*> {
         return when (type) {
-            R.layout.item_joke_category -> JokeItemHolder(view)
+            R.layout.item_joke -> JokeItemHolder(view)
             else -> throw RuntimeException("Illegal view type")
         }
     }
 
-    override fun typeJokeItem(type: Joke): Int = R.layout.item_joke_category
+    override fun typeJokeItem(type: Joke): Int = R.layout.item_joke
+    override fun typeJokeListItem(type: String): Int = R.layout.item_joke_category
 }

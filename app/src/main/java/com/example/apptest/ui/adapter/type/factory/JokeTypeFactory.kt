@@ -5,4 +5,5 @@ import com.example.apptest.ui.adapter.base.BaseTypeFactory
 
 interface JokeTypeFactory: BaseTypeFactory {
     fun typeJokeItem(type: Joke): Int
+    fun typeJokeListItem(type: String): Int
 }
